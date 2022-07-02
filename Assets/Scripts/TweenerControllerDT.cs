@@ -4,6 +4,17 @@ using UnityEngine;
 using DG.Tweening;
 using System;
 
+public enum TypeMovement
+{
+    NOTHING, 
+    QUADRATIC, 
+    SINE, 
+    CUBIC, 
+    ROOT, 
+    COSSINE, 
+    EXPONENTIAL
+}
+
 public class TweenerControllerDT : MonoBehaviour
 {
     [SerializeField] private List<Transform> _points;
@@ -12,7 +23,7 @@ public class TweenerControllerDT : MonoBehaviour
 
     [SerializeField] private float xPos;
 
-    [SerializeField] private int typeMovement;
+    [SerializeField] private TypeMovement tm;
 
     [SerializeField] private float increaseX;
 
@@ -38,32 +49,32 @@ public class TweenerControllerDT : MonoBehaviour
     private void MovementMathFunction(){
         float zPos = 0;
 
-        switch (typeMovement){
-            case 0:
+        switch (tm){
+            case TypeMovement.NOTHING:
                 zPos = 0;
                 xPos = 0;
             break;
-            case 1:
+            case TypeMovement.QUADRATIC:
                 zPos = (float)Math.Pow(xPos,2);
                 xPos+=increaseX;
             break;
-            case 2:
+            case TypeMovement.SINE:
                 zPos = (float)Math.Sin(xPos);
                 xPos+=increaseX;
             break;
-            case 3:
+            case TypeMovement.CUBIC:
                 zPos = (float)Math.Pow(xPos,3);
                 xPos+=increaseX;
             break;
-            case 4:
+            case TypeMovement.ROOT:
                 zPos = (float)Math.Sqrt(xPos);
                 xPos+=increaseX;
             break;
-            case 5:
+            case TypeMovement.COSSINE:
                 zPos = (float)Math.Cos(xPos);
                 xPos+=increaseX;
             break;
-            case 6:
+            case TypeMovement.EXPONENTIAL:
                 zPos = (float)Math.Exp(xPos);
                 xPos+=increaseX;
             break;
